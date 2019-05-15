@@ -6,8 +6,8 @@ void show_ssb_tab(struct ssb_info *info)
 {
 
     printf("Speculative Store Bypass:\n");
-    printf("Affected?: %s\n", (info->affected ? "Vulnerable" : "Not Affected"));
-
+    printf("--------------------------------------:\n");
+    printf("Speculative Store Bypass: %s\n", (info->affected ? "Vulnerable" : "Not Affected"));
 	printf("Speculative Store Bypass Disable: ");
 	
 	if (info->affected) {
@@ -19,5 +19,6 @@ void show_ssb_tab(struct ssb_info *info)
 	} else {
         printf("Not Required"); // , style->green);
 	}
+    printf("\n");
     printf("\n");
 }
