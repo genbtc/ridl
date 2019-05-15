@@ -36,7 +36,7 @@ get_microcode(void)
 			continue;
 		}
 
-		value = strdup(value);
+		value = _strdup(value);
 		free(key);
 		key = NULL;
 		break;

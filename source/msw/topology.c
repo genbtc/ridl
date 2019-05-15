@@ -142,7 +142,7 @@ read_cpu_topology(struct cpu_topology *topo)
 		if (info->Relationship != RelationProcessorCore)
 			continue;
 
-		ncpus += count_mask(&info->Processor);
+		ncpus += (unsigned long)count_mask(&info->Processor);
 	}
 
 	if (!ncpus)

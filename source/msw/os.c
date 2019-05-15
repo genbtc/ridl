@@ -21,13 +21,13 @@ get_os_name(void)
 	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,
 		L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", 0,
 		KEY_QUERY_VALUE, &key) != ERROR_SUCCESS)
-		return strdup("Microsoft Windows");
+		return _strdup("Microsoft Windows");
 
 	status = RegQueryValueEx(key, L"ProductName", 0, 0, (LPBYTE)data, &size);
 	RegCloseKey(key);
 
 	if (status != ERROR_SUCCESS)
-		return strdup("Microsoft Windows");
+		return _strdup("Microsoft Windows");
 
 	len = WideCharToMultiByte(CP_UTF8, 0, data, size, NULL, 0, NULL, NULL);
 	name = (char *)malloc(len);

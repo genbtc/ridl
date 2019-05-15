@@ -47,7 +47,7 @@ cpuid_get_vendor(void)
 	memcpy(vendor + 8, regs + 2, 4);
 	vendor[12] = '\0';
 
-	return strdup(vendor);
+	return _strdup(vendor);
 }
 
 char *
@@ -67,7 +67,7 @@ cpuid_get_brand_string(void)
 
 	name[48] = '\0';
 
-	return strdup(name);
+	return _strdup(name);
 }
 
 const char *

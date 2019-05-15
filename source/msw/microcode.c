@@ -18,27 +18,27 @@ get_microcode(void)
 	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,
 		L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0,
 		KEY_QUERY_VALUE, &key) != ERROR_SUCCESS)
-		return strdup("Unknown");
+		return _strdup("Unknown");
 
 	status = RegQueryValueEx(key, L"Update Revision", 0, 0, NULL, &size);
 	
 	if (status != ERROR_SUCCESS) {
 		RegCloseKey(key);
-		return strdup("Unknown");
+		return _strdup("Unknown");
 	}
 
 	data = calloc(size, sizeof *data);
 
 	if (!data) {
 		RegCloseKey(key);
-		return strdup("Unknown");
+		return _strdup("Unknown");
 	}
 	
 	status = RegQueryValueEx(key, L"Update Revision", 0, 0, (LPBYTE)data, &size);
 
 	if (status != ERROR_SUCCESS) {
 		RegCloseKey(key);
-		return strdup("Unknown");
+		return _strdup("Unknown");
 	}
 
 	RegCloseKey(key);
@@ -47,7 +47,7 @@ get_microcode(void)
 
 	if (!hex) {
 		free(data);
-		return strdup("Unknown");
+		return _strdup("Unknown");
 	}
 
 	hex[0] = '0';
