@@ -28,6 +28,7 @@ Some warnings during the build DO appear, but it should say "[60/60]" and "Build
 (3). Extra Visual Studio build tips for newbies:
 
 In the icon toolbar, look for "x64-Debug (default)" dropdown menu, click it, choose "Manage Configurations...." then pick "x64-Release"<br>
+If you only have a 32-bit OS, you would pick 32-bit instead.<br>
 In the following text file that appears, (CMakeSettings.json), change the default build root directory:<br>
 `    from:   "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",`<br>
 `      to:   any new directory name of your choice. (use double backslashes)`<br>
@@ -48,7 +49,7 @@ Only the .exe files are needed when re-distributing.<br>
 ```
 mkdir build
 cd build
-cmake .. -G "Visual Studio 15 2017 Win64" -DCMAKE_C_FLAGS="/W0"
+cmake .. -G "Visual Studio 15 2017 Win64" -DCMAKE_C_FLAGS="/W0 /DNOCOLORS=1"
 cmake --build . --config "Release"
 cd "Release"
 ```
@@ -57,6 +58,7 @@ VS version:  (change to 16 2019 instead of 15 2017) <br>
 VS platform: (remove Win64 for 32-bit instead) <br>
 option 1: (change to Debug or RelWithDebInfo instead of Release) <br>
 option 2: (remove -DCMAKE_C_FLAGS="/W0" to not hide all compiler warnings)<br>
+option 3: (remove /DNOCOLORS=1 if your terminal CLI supports unicode colors)
 
 4. Done. Run the .exe: mdstool.exe or mdstool-cli.exe or .\mdstool.exe (powershell) <br>
 (the mdstool-cli.exe version will auto-exit/disappear when double-clicked from Explorer, it MUST be run from a pre-existing command prompt). <br>
@@ -65,10 +67,12 @@ option 2: (remove -DCMAKE_C_FLAGS="/W0" to not hide all compiler warnings)<br>
 5. Questions? 
 
 <br>
-The new -cli version now has colors, and will produce garbled text output _IF_ your regular old Windows command prompt (or even powershell) cannot support color. <br>
+The new -cli version now has colors, and will produce garbled text output _IF_ your regular Windows command prompt (even powershell) cannot support color. <br>
 A 3rd-party terminal program like "ConEMU" with color support is recommended in such a case...<br>
-Also, I am hosting an my original, text-only, no-color, command line version here @ [oldversion1-CLI branch](https://github.com/genbtc/ridl/tree/oldversion1-CLI) <br>
-TODO: Note that this is old code and has not been updated since the original May 15, 2019 release.<br>
+OR <br>
+compile with this new NOCOLORS=1 pre-processor macro set (/D , #define, add_definitions, etc) - does not affect the GUI version.<br>
+Also, I am hosting an my original, text-only, no-color, command line version here @ [oldversion1-CLI branch](https://github.com/genbtc/ridl/tree/oldversion1-CLI) for posterity (deprecated)<br>
+NOTE: the oldversion1-CLI branch is old code and has not been updated since the original May 15, 2019 release.<br>
 <br>
 
 Linux/Mac/BSD instructions.
